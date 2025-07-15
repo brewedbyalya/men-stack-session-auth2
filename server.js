@@ -14,6 +14,8 @@ if (process.env.PORT) {
   port = 3000;
 }
 
+const authController = require("./controllers/auth.js");
+
 mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection.on("connected", () => {
@@ -26,7 +28,11 @@ app.use(methodOverride("_method"));
 app.use(morgan('dev'));
 
 // Routes
+app.get("/", async (req, res) => {
+  res.render("index.ejs");
+});
 
+app.use("/auth", authController);
 
 // Server
 app.listen(port, () => {
