@@ -42,13 +42,11 @@ router.post('/sign-up', async (req, res) => {
 
 router.post('/sign-in', async (req, res) => {
   try {
-    // First, get the user from the database
     const userInDatabase = await User.findOne({ username: req.body.username });
     if (!userInDatabase) {
       return res.send('Login failed. Please try again.');
     }
   
-    // There is a user! Time to test their password with bcrypt
     const validPassword = bcrypt.compareSync(
       req.body.password,
       userInDatabase.password
