@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const morgan = require("morgan");
 
+const session = require('express-session');
+
 let port;
 if (process.env.PORT) {
   port = process.env.PORT;
@@ -27,11 +29,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 app.use(morgan('dev'));
 
-// Routes
-app.get("/", async (req, res) => {
-  res.render("index.ejs");
-});
+// Session
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
+// Routes
+app.get("/", (req, res) => {
+  res.render("index.ejs", {
+    user: req.session.user,
+  });
+});
 app.use("/auth", authController);
 
 // Server
