@@ -1,23 +1,32 @@
 body {
-    background-color:cornsilk;
+    background-color: cornsilk;
+    text-align: center;
 }
 
-form {
+/* form {
     display: flex;
     flex-direction: column;
-}
+    width: 90vw;
+} */
 
-.listing-img
-{
+.listing-img {
     width: 50vw;
 }
-
 ul {
-    margin:0px;
-    padding: 0px;
+    margin: 0px;
+    padding: 0px
 }
 
 li {
     list-style: none;
     text-align: center;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+}
+
+#edit-button {
+    width: 90vw;
 }
