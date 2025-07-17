@@ -1,18 +1,23 @@
-const express = require('express')
-const router = express.Router()
-const listings = require('../models/listing')
-const isSignedIn = require('../middleware/is-signed-in')
+const express = require('express');
+const router = express.Router();
+const listings = require('../models/listing');
+const isSignedIn = require('../middleware/is-signed-in');
+const upload = require('../config/multer');
 
 
 // new - get
 router.get('/new', isSignedIn, (req, res) => {
-    res.render('listing/new.ejs')
+    res.render('listing/new.ejs');
 })
 
 // new - post
-router.post('/', isSignedIn, async (req, res) => {
+router.post('/', isSignedIn, upload.single('image'), async (req, res) => {
     try {
         req.body.seller = req.session.user._id
+        req.body.image = {
+            url: req.file.path,
+            cloudinary_id: req.file.fieldname
+        }
         await listings.create(req.body)
         res.redirect('/listing')
     } catch (error) {

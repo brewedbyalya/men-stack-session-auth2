@@ -1,6 +1,6 @@
 <%- include('../partials/header')%>
 
-<form action="/listing" method="POST" class="container mt-4" style="max-width: 600px;">
+<form action="/listing" method="POST" class="container mt-4" style="max-width: 600px;" enctype="multipart/form-data">
   <h2 class="mb-4">Create a New Listing</h2>
 
   <div class="mb-3">
@@ -19,8 +19,8 @@
   </div>
 
   <div class="mb-3">
-    <label for="image" class="form-label">Image URL</label>
-    <input type="text" name="image" id="image" class="form-control" />
+    <label for="image" class="form-label">Upload an Image:</label>
+    <input type="file" accept="image/*" name="image" id="image" class="form-control" required/>
   </div>
 
   <button type="submit" class="btn btn-primary">Create Listing</button>
