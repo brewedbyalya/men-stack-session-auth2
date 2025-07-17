@@ -3,14 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheet/style.css">
     <title><%= foundListing.title %></title>
 </head>
 <body>
     <h2><%= foundListing.title %></h2>
     <p><%= foundListing.description %></p>
-    <p><strong><%= foundListing.price %> BHD</strong></p>
     <p>Seller: <%= foundListing.seller.username %></p>
+    <p><strong><%= foundListing.price %> BHD</strong></p>
     <img src="<%= foundListing.image %>" class="listing-img" alt="Image of <%= foundListing.title %>" />
+
+    <% if (foundListing.seller._id.equals(user._id)) { %>
+        <div class="actions">
+            <form action="/listing/<%= foundListing._id %>?_method=DELETE" method="POST">
+                <button type="submit">Delete</button>
+            </form>
+            <a href="/listing/<%= foundListing._id %>/edit">
+                <button id="edit-button">Edit</button>
+            </a>
+        </div>
+    <% } %>
+
+        <h3>Leave a Comment</h3>
+        <form action="/listing/<%=foundListing._id $>/comments">
+            <textarea name="content" id=""></textarea>
+            <button type="submit">Post Comment</button>
+        </form>
+
 </body>
 </html>

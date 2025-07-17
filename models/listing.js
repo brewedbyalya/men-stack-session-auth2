@@ -1,6 +1,15 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
+const commentSchema  = new mongoose.Schema({
+    content: String,
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    },
+}, { timestamps: true },
+);
+
 const listingSchema = new mongoose.Schema({
     title: String,
     description: String,
@@ -10,6 +19,7 @@ const listingSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
-}, { timestamps: true })
+    comments: [commentSchema]
+}, { timestamps: true });
 
-module.exports = mongoose.model('listings', listingSchema)
+module.exports = mongoose.model('listings', listingSchema);
