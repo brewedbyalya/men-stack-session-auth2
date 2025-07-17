@@ -1,23 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/stylesheet/style.css">
-    <title>All the Listings</title>
-</head>
-<body>
-    <h1>Marketplace Listings</h1>
+<%- include('../partials/header') %>
 
-    <ul>
-        <% foundListings.forEach((listings) => { %>
-            <li>
-                <a href="/listing/<%= listings._id %>"><h2><%= listings.title %></h2></a>
-                <p><%= listings.description %></p>
-                <p><strong><%= listings.price %> BHD</strong></p>
-                <img src="<%= listings.image %>" class="listing-img" alt="Image of <%= listings.title %>" />
-            </li>
-        <% }) %>
-    </ul>
-</body>
-</html>
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Marketplace Listings</h1>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% foundListings.forEach((listing) => { %>
+      <div class="col">
+        <div class="card h-100">
+          <img src="<%= listings.image %>" class="card-img-top" alt="Image of <%= listings.title %>">
+          <div class="card-body">
+            <h5 class="card-title"><%= listings.title %></h5>
+            <p class="card-text"><%= listings.description %></p>
+            <p class="card-text"><strong><%= listings.price %> BHD</strong></p>
+            <a href="/listing/<%= listings._id %>" class="btn btn-primary">View Listing</a>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>
+
+    <%- include('../partials/footer')%>
